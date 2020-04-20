@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Students' Record Sheet | NuraProgrammer.com</title>
+  <link rel="stylesheet" href="src/style.css">
+  <script src="js/jquery-3.3.1.js" charset="utf-8"></script>
+  <script src="js/control.js" charset="utf-8"></script>
+  <noscript>
+    <p><em>Sorry, running <strong>script</strong> was Disable
+      on your browser!</p>
+    <h3>Please Enable script to Enjoy Full Feature of this App!</h3>
+  </noscript>
+</head>
+<body>
+  <!-- header menus -->
+  <header>
+    <div id="branding" class="hover">Nura Programer</div>
+    <nav>
+      <ul>
+        <li><a href="index.html" class="active">Records</a></li>
+        <li><a href="newRecord.html">New Record</a></li>
+      </ul>
+    </nav>
+  </header>
+  <!-- Main Show -->
+  <article>
+    <!-- search panel -->
+    <div id="searchField">
+      <!-- Search input panel -->
+      <form onsubmit="return searchRecord()" method="post">
+        <input type="text" name="search" id="search"
+          placeholder="Search Record...">
+      </form>
+    </div>
+    <!-- table panel -->
+    <section>
+      <div id="headingPanel">
+        <h2>Students' Marks Record</h2>
+      </div>
+      <div id="tablePanel">
+        <table>
+          <thead>
+            <th>S/N</th>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Test1</th>
+            <th>Test2</th>
+            <th>Exam</th>
+            <th>Total</th>
+            <th>Remark</th>
+          </thead>
+        </table>
+      </div>
+    </section>
+  </article>
+  <footer>
+    <p>NuraProgrammer.com &copy; 2019</p>
+  </footer>
+</body>
+</html>
+
+// modal and its contents
+<div id="modal">
+  <div id="modal-content">
+    <div id="modal-container">
+      <div id="modal-head">
+        <h2>Student's Record</h2>
+        <span>&times;</span>
+      </div>
+      <div id="modal-body">
+
+      </div>
+      <div id="modal-control">
+        <a id="del">Delete</a>
+        <a id="close">Close</a>
+      </div>
+    </div>
+  </div>
+</div>
