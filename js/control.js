@@ -13,7 +13,7 @@ $(function () {
   $("#modal").hide();
 
   if(tableData == ""){
-    if($("title").text() == "Students' Record Sheet | NProgrammer"){
+    if($("title").text() == "Students' Record Sheet | Nura Programmer"){
       tableData = $("table").html();
       alert("You can Add some Record in the 'New Record' Tab ^!");
     }
@@ -184,7 +184,7 @@ function getRecords() {
 }
 /* Nura Programmer */
 function refreshPage() {
-  if($("title").text() != "Students' Record Sheet | NuraProgrammer.com")
+  if($("title").text() != "Students' Record Sheet | Nura Programmer")
     return;
 
   for(var i = 0; i < studentList.length; ++i)

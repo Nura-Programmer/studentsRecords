@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Students' Record Sheet | Nura Programmer</title>
+  <style media="screen">
+    body{
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      color: #f2f2f2;
+
+    }
+
+    header{
+      background-color: #4CAF50;
+      height: 50px;
+      border-bottom: 1px solid #000;
+    }
+
+    #branding{
+      float: left;
+      margin-left: 8px;
+      margin-top: 8px;
+      font-size: 1.6em;
+      text-shadow: 4px 4px 10px #bbb;
+      font-weight: bold;
+    }
+
+    .hover:hover{
+      opacity: .6;
+      cursor: pointer;
+    }
+
+    nav{
+      float: right;
+      margin-top: 8px;
+      margin-right: 8px;
+    }
+
+    nav ul{
+      display: inline-block;
+      list-style-type: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav li{
+      display: block;
+      margin: 0 5px;
+      padding: 8px;
+      text-decoration: none;
+      width: 100px;
+      text-align: center;
+      border-radius: 20px;
+      border: thin solid #f2f2f2;
+      color: #f2f2f2;
+      cursor: pointer;
+    }
+
+    nav li:hover{
+      background-color: #f2f2f2;
+      color: #4CAF50;
+    }
+
+    nav li.active{
+      background-color: #f2f2f2;
+      color: #4CAF50;
+    }
+
+    article{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 98%;
+    }
+
+    #searchField{
+      background-color: #4CAF50;
+      box-shadow: 5px 5px 10px #000;
+      border-radius: 10px;
+      text-align: center;
+      width: 80%;
+      margin: 20px 0;
+      padding: 5px;
+    }
+
+    #search{
+      width: 80%;
+      height: 30px;
+      padding: 0 5px;
+      border-style: none;
+      border-bottom: 1px solid;
+    }
+
+    section{
+      width: 80%;
+      margin-bottom: 20px;
+      border: 1px solid black;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    section table{
+      padding: 50px;
+      border-style: solid;
+      border-width: thin;
+      background-color: #fff;
+      color: #000;
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    section tr:hover{
+      background-color: #ccc;
+      cursor: pointer;
+    }
+
+    #headingPanel{
+      text-align: center;
+      background-color: #4CAF50;
+      width: 99.5%;
+      padding: 1px;
+    }
+
+    #tablePanel{
+      width: 90%;
+      overflow: auto;
+      box-shadow: 5px 5px 10px #000;
+      margin-top: 15px;
+      margin-bottom: 20px;
+    }
+
+    section thead{
+      background-color: #4CAF50;
+      padding: 1px;
+      color: #fff;
+    }
+
+    section tr, section td{
+      text-align: left;
+      border-bottom-style: solid;
+      border-bottom-width: thin;
+    }
+
+    th, td{
+      padding: 5px;
+    }
+
+    #formPanel{
+      background-color: white;
+      width: 80%;
+      max-width: 400px;
+      margin: 20px 0;
+      box-shadow: 5px 5px 10px #555;
+    }
+
+    #formPanel h3{
+      background-color: teal;
+      margin-top: 0;
+      padding: 20px;
+    }
+
+    #formPanel{
+      margin-bottom: 20px;
+    }
+
+    form{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 10px 0;
+    }
+
+
+    /* Nura Programmer */
+    form input{
+      margin: 10px 0;
+      width: 50%;
+      border-style: none;
+      border-bottom-style: solid;
+      border-width: thin;
+      height: 30px;
+      padding: 0 5px;
+    }
+
+    form input[type="submit"]:hover{
+      box-shadow: 5px 5px 5px #bbb;
+    }
+
+    /* for input fields */
+    form input:hover{
+      border-style: solid;
+    }
+    /*
+    tr:nth-child(even){
+      background-color: #ccc;
+    }
+    */
+    footer{
+      background-color: #4CAF50;
+      height: 50px;
+      display: flex;
+      justify-content: center;
+      padding-bottom: 5px;
+      font-size: 1.2em;
+      border-top: 1px solid #000;
+    }
+
+    #modal{
+      position: fixed;
+      z-index: 999;
+      width: 100%;
+      height: 100%;
+      color: #000;
+      top: 0;
+      left: 0;
+      background-color: #000;
+      opacity: .9;
+
+      /* center the containers */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #modal-content{
+      position: relative;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 5px 5px 5px #bbb;
+      width: 50%;
+      min-width: 280px;
+      max-width: 350px;
+    }
+
+    #modal-container{
+      width: 100%;
+    }
+
+    #modal-head{
+      background-color: #4CAF50;
+      color: #fff;
+      text-align: center;
+      padding: 1px;
+      display: block;
+      height: 50px;
+    }
+
+    #modal-head h2{
+      float: left;
+      margin-left: 15px;
+      margin-top: 12px;
+    }
+
+    #modal-head span{
+      float: right;
+      margin-right: 10px;
+      margin-top: 5px;
+      font-size: 2em;
+      width: 30px;
+      color: #f00;
+    }
+
+    #modal-head span:hover, #modal-control a:hover{
+      background-color: #f00;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    #modal-head span:active, #modal-control a:active{
+      color: #000;
+    }
+
+    #modal-control{
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    #modal-control a{
+      text-decoration: none;
+      margin: 5px 40px;
+      padding: 5px;
+      display: inline-block;
+      border-radius: 4px;
+    }
+
+    #modal ul{
+      list-style: none;
+      font-weight: bold;
+    }
+
+    .remark{
+      font-size: 1.2em;
+      /*text-shadow: 2px 0px #121212;*/
+    }
+
+    .excellent-remark{
+      color: #0012ff;
+    }
+
+    .good-remark{
+      color: #4CAF50;
+    }
+
+    .fair-remark{
+      color: #8c008c;
+    }
+
+    .poor-remark{
+      color: #8c0000;
+    }
+
+    .fail-remark{
+      color: #f00;
+    }
+    /*
+    #modal-body li:nth-child(odd){
+      background-color: #424242;
+    }
+    */
+
+@media only screen and (max-width: 400px){
+  #branding{
+    font-size: .7em;
+    margin-top: 20px;
+  }
+
+  nav li{
+    width: 60px;
+    font-size: .6em;
+    margin-top: 4px;
+  }
+
+  #modal-content{
+    width: 80%;
+    min-width: 200px;
+  }
+
+  #modal-head h2{
+    font-size: 1.2em;
+  }
+
+  #modal-head span{
+    margin-top: 2px;
+    margin-right: 2px;
+  }
+
+  #modal-control{
+    background-color: green;
+  }
+
+  #modal-control a{
+    margin: 0 20px;;
+  }
+}
+</style>
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>-->
+<script src="js/jquery-3.3.1.js" charset="utf-8"></script>
+<noscript>
+  <p><em>Sorry, running <strong>script</strong> was Disable
+    on your browser!</p>
+  <h3>Please Enable script to Enjoy Full Feature of this App!</h3>
+</noscript>
+</head>
+<body>
+  <!-- header menus -->
+  <header>
+    <div id="branding" class="hover">Nura Programmer</div>
+    <nav>
+      <ul>
+        <li class="active" onclick="view('records');">Records</li>
+        <li onclick="view('newRecord');">New Record</li>
+      </ul>
+    </nav>
+  </header>
+  <!-- Main Show -->
+  <article>
+    <!-- search panel -->
+    <div id="searchField">
+      <!-- Search input panel -->
+      <form onsubmit="return searchRecord()" method="post">
+        <input type="text" name="search" id="search"
+          placeholder="Search Record...">
+      </form>
+    </div>
+    <!-- table panel -->
+    <section id="records">
+      <div id="headingPanel">
+        <h2>Students' Marks Record</h2>
+      </div>
+      <div id="tablePanel">
+        <table>
+          <thead>
+            <th>S/N</th>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Test1</th>
+            <th>Test2</th>
+            <th>Exam</th>
+            <th>Total</th>
+            <th>Remark</th>
+            <!-- By Nura Programmer -->
+          </thead>
+        </table>
+      </div>
+    </section>
+
+<!-- table panel -->
+  <section id="newRecord">
+    <div id="headingPanel">
+      <h2>New Record</h2>
+    </div>
+    <div id="formPanel">
+      <form id="form1" method="post" onsubmit="return saveData()">
+        <input type="text" id="firstName" placeholder="First Name" maxlength="25" required/>
+        <input type="text" id="surName" placeholder="Surname" maxlength="25" required/>
+        <input type="number" id="test1" placeholder="Test-1" max="20" required/>
+        <input type="number" id="test2" placeholder="Test-2" max="20" required/>
+        <input type="number" id="exam" placeholder="Exam" max="60" required/>
+        <!-- By Nura Programmer -->
+        <input type="submit" value="Save" id="submit">
+      </form>
+    </div>
+  </section>
+
+  <!-- modal box -->
+  <div id="modal">
+    <div id="modal-content">
+      <div id="modal-container">
+        <div id="modal-head">
+          <h2>Student's Record</h2>
+          <span>&times;</span>
+        </div>
+        <div id="modal-body">
+
+        </div>
+        <div id="modal-control">
+          <a id="del">Delete</a>
+          <a id="close">Close</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  </article>
+  <footer>
+    <p>Nura Programmer &copy; 2019</p>
+  </footer>
+</body>
+
+<script type="text/javascript">
+  var studentList = [];
+  var serial = 0;
+  var records;
+  var tableData = "";
+  var studentSerial;
+  var recordsTitle = "Students' Record Sheet | Nura Programmer";
+  var newRecordTitle = "New Students' Record | Nura Programmer";
+  var srJSON = {
+    "studentsRecords": [
+      {"fName":"Umar","sName":"Kabiru", "test":[16, 18, 59]},
+      {"fName":"Nura","sName":"Programmer", "test":[16, 17, 53]},
+      {"fName":"Berry","sName":"Alien", "test":[10, 12, 40]},
+      {"fName":"Oliver","sName":"Queen", "test":[16, 12, 35]},
+      {"fName":"Thear","sName":"Queen", "test":[9, 11, 31]},
+      {"fName":"Spider","sName":"Man", "test":[2, 10, 21]},
+      {"fName":"Super","sName":"Man", "test":[8, 15, 20]}
+    ]
+  };
+
+
+  $(function () {
+    // Hiding some elements
+    $("#modal").hide();
+    $("#newRecord").hide();
+
+    // attaching an event handler to close and span elements
+    $("#close, #modal-head span").on("click", function () {
+      $("#modal").hide();
+    });
+
+    // attaching to del element
+    $("#del").on("click", function () {
+      $("#modal").hide(); // Hide the view
+      delRecord(studentSerial); //delete one entery from the list
+      refreshPage();
+    });
+
+    if(tableData == ""){
+      if($("title").text() === "Students' Record Sheet | Nura Programmer"){
+        tableData = $("table").html();
+      }
+    }
+
+  if(localStorage){
+     records = localStorage.getItem("npStudents");
+     if(records){
+        studentList = JSON.parse(records);
+        refreshPage();
+     }else{
+        getRecords();
+     }
+  }else{
+      alert("[-] Your Browser Does Not Support Storing "
+      +"Files locally!");
+    }
+  });
+
+  /* Nura Programmer */
+  function viewRecord(sn) {
+    $("#modal").show();
+    var s = studentList[sn];
+    var dRemark = decorateRemark(s.remark);
+
+    var ul = $("<ul></ul>").html(
+      "<li>Name: "+ s.fName +" "+ s.sName +"</li>"+
+      "<li>1<sup>st</sup> Test: "+ s.test[0] +"</li>"+
+      "<li>2<sup>nd</sup> Test: "+ s.test[1] +"</li>"+
+      "<li>Exam: "+ s.test[2] +"</li>"+
+      "<li>Total: "+ s.total +"</li>"+ dRemark
+    );
+
+    studentSerial = sn;
+    $("#modal-body").html(ul);
+  }
+
+  function decorateRemark(rk) {
+    var str1, str2, str3;
+    str1 = "<li class='";
+    str2 = "remark ";
+    str3 = "'>Remark: "+ rk +"</li>";
+
+    switch (rk) {
+      case "A'": str2 += "excellent-remark";
+        break;
+      case "A": case "B": case "C": str2 += "good-remark";
+        break;
+      case "D": str2 += "fair-remark";
+        break;
+      case "E": str2 += "poor-remark";
+        break;
+      case "F": default: str2 += "fail-remark";
+    }
+
+    rk = str1 + str2 + str3;
+    return rk;
+  }
+
+  function searchRecord() {
+    var se = $("#search");
+    if(found()){
+      viewRecord(studentSerial);
+    }else {
+      alert("\""+se.val() +"\" -> Entary Found!");
+    }
+
+    se.val(""); //Clear Field
+    return false;  //Disable Submiting the form
+  }
+
+  function getText(txt) {
+    var txtArr = txt.split(" ");
+    txt = "";
+
+    for(var i = 0; i < txtArr.length; ++i){
+      txt += txtArr[i].toLowerCase().trim();
+    }
+    return txt;
+
+  }/* Nura Programmer */
+  function found() {
+    var sTxt = getText($("#search").val());
+    var sRecord;
+
+    for(var i = 0; i < studentList.length; ++i){
+      sRecord = studentList[i];
+      sRecord.fName = getText(sRecord.fName);
+      sRecord.sName = getText(sRecord.sName);
+
+      switch(sTxt){
+        case sRecord.fName:
+        case sRecord.fName + sRecord.sName:
+          studentSerial = i;
+          return true;
+      }
+    }
+    return false;
+  }
+
+  function delRecord(sn) {
+    var newList = [];
+    //alert("Deleting :"+sn);
+    for(var i = 0; i < studentList.length-1; ++i){
+      if(i < sn){
+        newList[i] = studentList[i];
+      }else {
+        newList[i] = studentList[i+1];
+      }
+    }
+
+    serial = 0;
+    $("table").html(tableData);
+
+    studentList = newList;
+    localStorage.setItem("npStudents",
+      JSON.stringify(studentList));
+  }
+/* Nura Programmer */
+  function saveData() {
+    var fn = $("#formPanel #firstName").val();
+    var sn = $("#formPanel #surName").val();
+    var t1 = Number($("#formPanel #test1").val());
+    var t2 = Number($("#formPanel #test2").val());
+    var em = Number($("#formPanel #exam").val());
+
+    studentList.push(new student(fn, sn, [t1, t2, em]));
+    localStorage.setItem("npStudents", JSON.stringify(studentList));
+
+    var addNew = confirm("Record Saved Successfully"
+    +"\nDo You Want Add New Entery?");
+
+    document.getElementById('form1').reset();  //empty form feild
+    if(!addNew){
+      window.location = "#";
+      view('records');
+    }
+
+    return false;  //Disable Submiting the form
+  }
+
+  function getRecords() {
+    /*
+    *
+    * Deprecated since i use variable not file to store the json data
+    *
+    *
+
+    $.getJSON("js/studentRecords.json", function (json) {
+      for (var i = 0; i < json.length; i++) {
+        var j = json[i];
+        studentList.push(new student(j.fName, j.sName,j.test));
+      }
+
+      localStorage.setItem("npStudents", JSON.stringify(studentList));
+      refreshPage();
+    });
+    *
+    *
+    */
+
+    for (var i = 0; i < srJSON.studentsRecords.length; i++) {
+      var j = srJSON.studentsRecords[i];
+      studentList.push(new student(j.fName, j.sName,j.test));
+    }
+
+    localStorage.setItem("npStudents", JSON.stringify(studentList));
+    refreshPage();
+  }
+
+  function refreshPage() {
+    if($("title").text() != "Students' Record Sheet | Nura Programmer") return;
+    for(var i = 0; i < studentList.length; ++i) updatePage(studentList[i]);
+  }
+
+  function updatePage(student) {
+
+    var tr = $("<tr id='"+ serial
+    +"' onclick='viewRecord("+ serial +")'></tr>").html(
+      "<td>"+ ++serial +"</td>"+
+      "<td>"+ student.fName +"</td>"+
+      "<td>"+ student.sName +"</td>"+
+      "<td>"+ student.test[0] +"</td>"+
+      "<td>"+ student.test[1] +"</td>"+
+      "<td>"+ student.test[2] +"</td>"+
+      "<td>"+ student.total +"</td>"+
+      "<td>"+ student.remark +"</td>"
+    );
+
+    $("table").append(tr);
+    //alert($("table").html());/* Nura Programmer */
+  }
+
+  function student(fName, sName, test) {
+    this.fName = fName;
+    this.sName = sName;
+    this.test = test;
+    this.total = getTotal(test);
+    this.remark = getRemark(this.total);
+  }
+
+  function getTotal(marks) {
+    var test;
+    var total = 0;
+
+    for(test = 0; test < marks.length; ++test){
+      total += marks[test];
+    }
+    return total;
+  }
+
+  function getRemark(totalMark) {
+    var remark = "";
+    totalMark /= 10;
+
+    if(totalMark >= 9){
+      remark = "A'";
+    }else if (totalMark >= 7 && totalMark < 9) {
+      remark = "A";
+    }else if (totalMark >= 6 && totalMark < 7) {
+      remark = "B";
+    }else if (totalMark >= 5 && totalMark < 6) {
+      remark = "C";
+    }else if (totalMark >= 4.5 && totalMark < 5) {
+      remark = "D";
+    }else if (totalMark >= 4 && totalMark < 4.5) {
+      remark = "E";
+    }else {
+      remark = "F";
+    }
+
+    return remark;/* Nura Programmer */
+  }
+
+  function toggleTitle() {
+    var currenTitle = $("title").text();
+
+  }
+
+  function view(fPage) {
+    fPage = "#"+ fPage;
+    var sPage = "";
+    var msgTxt = "";
+    var pageIndex = -1;
+    var pageTitle = "";
+
+    if(fPage === "#records"){
+      sPage = "#newRecord";
+      msgTxt = "1. Click on a row to delete or open an Entery in a well formatted View\n"+
+      "2. Click on the 'New Record' Tab^ to add some Entery";
+      pageTitle = recordsTitle;
+      pageIndex = 0;
+    }else{
+      sPage = "#records";
+      pageTitle = newRecordTitle;
+      pageIndex = 1;
+    }
+
+    $(fPage).show(function () {
+      $("title").text(pageTitle);
+      refreshPage();
+      if(fPage === "#records") alert(msgTxt);
+    });
+
+    $(sPage).hide();
+    $("nav li").removeClass("active");
+    $("nav li").eq(pageIndex).addClass("active");
+  }
+</script>
+<!-- By Nura Programmer -->
+</html>
