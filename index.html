@@ -664,12 +664,15 @@
 
   function refreshPage() {
     if($("title").text() != "Students' Record Sheet | Nura Programmer") return;
-    for(var i = 0; i < studentList.length; ++i) updatePage(studentList[i]);
+    let newPage = "";
+    for(var i = 0; i < studentList.length; ++i) newPage += updatePage(studentList[i]);
+    
+    $("tbody").html(newPage);
   }
 
   function updatePage(student) {
 
-    var tr = $("<tr id='"+ serial
+    return $("<tr id='"+ serial
     +"' onclick='viewRecord("+ serial +")'></tr>").html(
       "<td>"+ ++serial +"</td>"+
       "<td>"+ student.fName +"</td>"+
@@ -680,8 +683,7 @@
       "<td>"+ student.total +"</td>"+
       "<td>"+ student.remark +"</td>"
     );
-
-    $("table").append(tr);
+    
     //alert($("table").html());/* Nura Programmer */
   }
 
