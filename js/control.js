@@ -187,13 +187,16 @@ function refreshPage() {
   if($("title").text() != "Students' Record Sheet | Nura Programmer")
     return;
 
+  let newPage = "";
   for(var i = 0; i < studentList.length; ++i)
-    updatePage(studentList[i]);
+    newPage += updatePage(studentList[i]);
+  
+  $("tbody").html(newPage);
 }
 
 function updatePage(student) {
 
-  var tr = $("<tr id='"+ serial
+  return $("<tr id='"+ serial
   +"' onclick='viewRecord("+ serial +")'></tr>").html(
     "<td>"+ ++serial +"</td>"+
     "<td>"+ student.fName +"</td>"+
@@ -204,8 +207,7 @@ function updatePage(student) {
     "<td>"+ student.total +"</td>"+
     "<td>"+ student.remark +"</td>"
   );
-
-  $("table").append(tr);
+  
   //alert($("table").html());
 }
 
